@@ -7,24 +7,26 @@ const loginController = (req, res) => {
     let passIzForme = req.body.password;
 
     db.users.find({ first_name: nameIzForme, password: passIzForme }, (err, docs) => {
-      if(err) {
-          console.log('greska');
-          res.redirect('/');
-      } else {
-          if(docs.length === 1) {
-            let user = docs[0];
-            req.session.user = user;
-            if(user.role == 'admin') {
-                res.redirect('/admin');
-            } else if(user.role == "operater") {
-                res.redirect('/operater')
+        if (err) {
+            console.log('greska');
+            res.redirect('/');
+        } else {
+            if (docs.length === 1) {
+                let user = docs[0];
+                req.session.user = user;
+                if (user.role == 'admin') {
+                    res.redirect('/admin');
+                } else if (user.role == "operater") {
+                    res.redirect('/operater')
+                } else if (user.role == "savetnik") {
+                    res.redirect('/savetnik')
+                } else {
+                    res.redirect('/');
+                }
             } else {
-                res.redirect('/');
+                res.redirect('/')
             }
-          } else {
-              res.redirect('/')
-          }
-      }
+        }
     })
 }
 

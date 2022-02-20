@@ -29,6 +29,10 @@ router.post('/create/grad/save', require('../controllers/admin/createGradControl
 
 router.post('/create/proizvod/save', require('../controllers/admin/createProizvodController'));
 
+// savetnik
+
+router.get('/savetnik/termini/:name', require('../controllers/admin/savetnikTerminiController'));
+
 function checkAdmin(req, res, next) {
   let user = req.session.user;
   if(user) {
